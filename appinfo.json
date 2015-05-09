@@ -3,8 +3,8 @@
     "capabilities": [
         ""
     ],
-    "companyName": "stevegroves123@gmail.com",
-    "longName": "watchFace_Time",
+    "companyName": "Pinnacle Software",
+    "longName": "Pebble_Time_watchface_words",
     "projectType": "native",
     "resources": {
         "media": []
@@ -16,7 +16,7 @@
     ],
     "uuid": "649376ee-a4d6-4f73-88c1-7f7e78af9a7d",
     "versionCode": 1,
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "watchapp": {
         "watchface": true
     }
