@@ -1,0 +1,23 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "stevegroves123@gmail.com",
+    "longName": "watchFace_Time",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "watchFace_Time",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "649376ee-a4d6-4f73-88c1-7f7e78af9a7d",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
