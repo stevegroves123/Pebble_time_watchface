@@ -11,6 +11,8 @@ static void update_time() {
 
   // Create a long-lived buffer
   static char buffer[] = "00:00";
+  static char year[] = "0000";
+  static char date[] = "00/00";
 
   // Write the current hours and minutes into the buffer
   if(clock_is_24h_style() == true) {
@@ -21,10 +23,15 @@ static void update_time() {
     strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
   }
 
+  // display the date in day/month format
+  strftime(date, sizeof("00/00"), "%d/%m", tick_time);
+  
+  strftime(year, sizeof("00000"), " %Y", tick_time);
+  
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, buffer);
-  text_layer_set_text(s_messagetime_layer, "time  ");
-  text_layer_set_text(s_messagepebble_layer, "  Pebble");
+  text_layer_set_text(s_messagetime_layer, year);
+  text_layer_set_text(s_messagepebble_layer, date);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {

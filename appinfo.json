@@ -10,12 +10,11 @@
         "media": []
     },
     "sdkVersion": "3",
-    "shortName": "watchFace_Time",
+    "shortName": "Pebble_Time",
     "targetPlatforms": [
         "basalt"
     ],
     "uuid": "649376ee-a4d6-4f73-88c1-7f7e78af9a7d",
-    "versionCode": 1,
     "versionLabel": "1.1",
     "watchapp": {
         "watchface": true
