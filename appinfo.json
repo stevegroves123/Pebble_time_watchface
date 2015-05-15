@@ -1,13 +1,21 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "KEY_INVERT": 0
+    },
     "capabilities": [
-        ""
+        "configurable"
     ],
     "companyName": "Pinnacle Software",
-    "longName": "Pebble_Time_watchface_words",
+    "longName": "Pebble_Time_watchface",
     "projectType": "native",
     "resources": {
-        "media": []
+        "media": [
+            {
+                "file": "images/SG.png",
+                "name": "menu_icon",
+                "type": "png"
+            }
+        ]
     },
     "sdkVersion": "3",
     "shortName": "Pebble_Time",
@@ -15,7 +23,7 @@
         "basalt"
     ],
     "uuid": "649376ee-a4d6-4f73-88c1-7f7e78af9a7d",
-    "versionLabel": "1.1",
+    "versionLabel": "2.1",
     "watchapp": {
         "watchface": true
     }
