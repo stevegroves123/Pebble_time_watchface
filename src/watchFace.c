@@ -61,25 +61,25 @@ static void main_window_load(Window *window)
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
   s_messagedate_layer = text_layer_create(GRect (0, 0, 144, 50));
-  text_layer_set_background_color(s_messagedate_layer, GColorBlue);
-  text_layer_set_text_color(s_messagedate_layer, GColorWhite);
   text_layer_set_font(s_messagedate_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
+  text_layer_set_text_color(s_messagedate_layer, GColorWhite);
   text_layer_set_text_alignment(s_messagedate_layer, GTextAlignmentLeft);
 
   s_messageyear_layer = text_layer_create(GRect (0, 120, 144, 50)); 
   text_layer_set_font(s_messageyear_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
+  text_layer_set_text_color(s_messageyear_layer, GColorWhite);
   text_layer_set_text_alignment(s_messageyear_layer, GTextAlignmentRight);  
     
     //Option-specific at start up
   if(inverted == true)
   {
-    text_layer_set_text_color(s_messageyear_layer, GColorWhite);
     text_layer_set_background_color(s_messageyear_layer, GColorBlue);
+    text_layer_set_background_color(s_messagedate_layer, GColorBlue);
   }
   else
   {
-    text_layer_set_text_color(s_messageyear_layer, GColorWhite);
     text_layer_set_background_color(s_messageyear_layer, GColorRed);
+    text_layer_set_background_color(s_messagedate_layer, GColorRed);
   }
   
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
@@ -109,6 +109,7 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
         //Set and save as inverted
         text_layer_set_text_color(s_messageyear_layer, GColorWhite);
         text_layer_set_background_color(s_messageyear_layer, GColorBlue);
+        text_layer_set_background_color(s_messagedate_layer, GColorBlue);
  
         persist_write_bool(KEY_INVERT, true);
       }
@@ -117,7 +118,8 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
         //Set and save as not inverted
         text_layer_set_text_color(s_messageyear_layer, GColorWhite);
         text_layer_set_background_color(s_messageyear_layer, GColorRed);
- 
+        text_layer_set_background_color(s_messagedate_layer, GColorRed);
+        
         persist_write_bool(KEY_INVERT, false);
       }
       break;
