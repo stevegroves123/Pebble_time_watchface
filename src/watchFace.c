@@ -5,12 +5,12 @@
 //*************************//
 
 #include <pebble.h>
-#define KEY_INVERT 0
+#define COLOUR_INVERT 0
 
   // Create a long-lived buffer
 static char buffer[] = "00:00";
-static char year[] = "0000 ";
-static char date[] = " 00/00";
+static char year[] = "0000";
+static char date[] = "00/00";
 
   // Create static text_layers
 static Window *s_main_window;
@@ -51,7 +51,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 static void main_window_load(Window *window)
   {
     //Check for saved option
-  bool inverted = persist_read_bool(KEY_INVERT);
+  bool inverted = persist_read_bool(COLOUR_INVERT);
   
   s_time_layer = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(s_time_layer, GColorClear);
@@ -102,25 +102,47 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   {
     switch(t->key)
     {
-    case KEY_INVERT:
+    case COLOUR_INVERT:
       //It's the KEY_INVERT key
-      if(strcmp(t->value->cstring, "on") == 0)
+      if(strcmp(t->value->cstring, "b") == 0)
       {
         //Set and save as inverted
         text_layer_set_text_color(s_messageyear_layer, GColorWhite);
         text_layer_set_background_color(s_messageyear_layer, GColorBlue);
+        text_layer_set_text_color(s_messagedate_layer, GColorWhite);
         text_layer_set_background_color(s_messagedate_layer, GColorBlue);
  
-        persist_write_bool(KEY_INVERT, true);
+        // persist_write_bool(KEY_INVERT, true);
       }
-      else if(strcmp(t->value->cstring, "off") == 0)
+      else if(strcmp(t->value->cstring, "r") == 0)
       {
         //Set and save as not inverted
         text_layer_set_text_color(s_messageyear_layer, GColorWhite);
         text_layer_set_background_color(s_messageyear_layer, GColorRed);
+        text_layer_set_text_color(s_messagedate_layer, GColorWhite);
         text_layer_set_background_color(s_messagedate_layer, GColorRed);
         
-        persist_write_bool(KEY_INVERT, false);
+        // persist_write_bool(KEY_INVERT, false);
+      }
+      else if(strcmp(t->value->cstring, "g") == 0)
+      {
+        //Set and save as not inverted
+        text_layer_set_text_color(s_messageyear_layer, GColorBlack);
+        text_layer_set_background_color(s_messageyear_layer, GColorGreen);
+        text_layer_set_text_color(s_messagedate_layer, GColorBlack);
+        text_layer_set_background_color(s_messagedate_layer, GColorGreen);
+        
+        // persist_write_bool(KEY_INVERT, false);
+      }
+      else if(strcmp(t->value->cstring, "w") == 0)
+      {
+        //Set and save as not inverted
+        text_layer_set_background_color(s_messageyear_layer, GColorWhite);
+        text_layer_set_text_color(s_messageyear_layer, GColorBlack);
+        text_layer_set_background_color(s_messagedate_layer, GColorWhite);
+        text_layer_set_text_color(s_messagedate_layer, GColorBlack);
+        
+        // persist_write_bool(KEY_INVERT, false);
       }
       break;
     }

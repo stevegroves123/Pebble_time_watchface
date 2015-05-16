@@ -12,6 +12,7 @@
         "media": [
             {
                 "file": "images/SG.png",
+                "menuIcon": true,
                 "name": "menu_icon",
                 "type": "png"
             }
