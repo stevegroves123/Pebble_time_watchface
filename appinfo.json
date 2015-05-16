@@ -1,6 +1,6 @@
 {
     "appKeys": {
-        "KEY_INVERT": 0
+        "COLOUR_INVERT": 0
     },
     "capabilities": [
         "configurable"

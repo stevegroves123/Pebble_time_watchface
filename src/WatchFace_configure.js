@@ -19,7 +19,7 @@ Pebble.addEventListener("webviewclosed",
  
     //Send to Pebble, persist there
     Pebble.sendAppMessage(
-      {"KEY_INVERT": configuration.invert},
+      {"COLOUR_INVERT": configuration.invert},
       function(e) {
         console.log("Sending settings data...");
       },
