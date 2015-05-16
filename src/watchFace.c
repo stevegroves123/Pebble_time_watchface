@@ -33,7 +33,7 @@ static void update_time() {
     strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
   }
 
-  // display the date in day/month format
+  // Display the date in day/month format
   strftime(date, sizeof(" 00/00"), "%d/%m", tick_time);
   strftime(year, sizeof("0000 "), " %Y", tick_time);
   
@@ -50,22 +50,58 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 static void main_window_load(Window *window)
   {
   
+  int32_t inverted = persist_read_int(COLOUR_INVERT);
+  
   s_time_layer = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorBlack);
   text_layer_set_text(s_time_layer, "00:00");
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
-
+    
   s_messagedate_layer = text_layer_create(GRect (0, 0, 144, 50));
   text_layer_set_font(s_messagedate_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
   text_layer_set_text_color(s_messagedate_layer, GColorWhite);
   text_layer_set_text_alignment(s_messagedate_layer, GTextAlignmentLeft);
-
+  
   s_messageyear_layer = text_layer_create(GRect (0, 120, 144, 50)); 
   text_layer_set_font(s_messageyear_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
   text_layer_set_text_color(s_messageyear_layer, GColorWhite);
   text_layer_set_text_alignment(s_messageyear_layer, GTextAlignmentRight);  
+  
+  //Option-specific setup
+  if(inverted == 1)
+    {
+        //Set colour to blue
+        text_layer_set_text_color(s_messageyear_layer, GColorWhite);
+        text_layer_set_background_color(s_messageyear_layer, GColorBlue);
+        text_layer_set_text_color(s_messagedate_layer, GColorWhite);
+        text_layer_set_background_color(s_messagedate_layer, GColorBlue);    
+  }
+  else if (inverted == 2)
+    {
+        //Set colout to red
+        text_layer_set_text_color(s_messageyear_layer, GColorWhite);
+        text_layer_set_background_color(s_messageyear_layer, GColorRed);
+        text_layer_set_text_color(s_messagedate_layer, GColorWhite);
+        text_layer_set_background_color(s_messagedate_layer, GColorRed);    
+  }
+  else if (inverted == 3)
+    {
+        //Set colour to green
+        text_layer_set_text_color(s_messageyear_layer, GColorBlack);
+        text_layer_set_background_color(s_messageyear_layer, GColorGreen);
+        text_layer_set_text_color(s_messagedate_layer, GColorBlack);
+        text_layer_set_background_color(s_messagedate_layer, GColorGreen);    
+  }
+  else if (inverted == 4)
+    {
+        //Set colout to white
+        text_layer_set_background_color(s_messageyear_layer, GColorWhite);
+        text_layer_set_text_color(s_messageyear_layer, GColorBlack);
+        text_layer_set_background_color(s_messagedate_layer, GColorWhite);
+        text_layer_set_text_color(s_messagedate_layer, GColorBlack);    
+  }
   
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_messageyear_layer));
@@ -88,14 +124,16 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
     switch(t->key)
     {
     case COLOUR_INVERT:
-      //It's the KEY_INVERT key
+      //It's the COLOUR_INVERT key
       if(strcmp(t->value->cstring, "b") == 0)
       {
         //Set colour to blue
         text_layer_set_text_color(s_messageyear_layer, GColorWhite);
         text_layer_set_background_color(s_messageyear_layer, GColorBlue);
         text_layer_set_text_color(s_messagedate_layer, GColorWhite);
-        text_layer_set_background_color(s_messagedate_layer, GColorBlue);
+        text_layer_set_background_color(s_messagedate_layer, GColorBlue); 
+        
+        persist_write_int(COLOUR_INVERT, 1);
       }
       else if(strcmp(t->value->cstring, "r") == 0)
       {
@@ -104,6 +142,8 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
         text_layer_set_background_color(s_messageyear_layer, GColorRed);
         text_layer_set_text_color(s_messagedate_layer, GColorWhite);
         text_layer_set_background_color(s_messagedate_layer, GColorRed);
+        
+        persist_write_int(COLOUR_INVERT, 2);
       }
       else if(strcmp(t->value->cstring, "g") == 0)
       {
@@ -112,14 +152,18 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
         text_layer_set_background_color(s_messageyear_layer, GColorGreen);
         text_layer_set_text_color(s_messagedate_layer, GColorBlack);
         text_layer_set_background_color(s_messagedate_layer, GColorGreen);
+        
+        persist_write_int(COLOUR_INVERT, 3);
       }
       else if(strcmp(t->value->cstring, "w") == 0)
       {
         //Set colout to white
-        text_layer_set_background_color(s_messageyear_layer, GColorWhite);
+        text_layer_set_background_color(s_messageyear_layer, GColorYellow);
         text_layer_set_text_color(s_messageyear_layer, GColorBlack);
-        text_layer_set_background_color(s_messagedate_layer, GColorWhite);
+        text_layer_set_background_color(s_messagedate_layer, GColorYellow);
         text_layer_set_text_color(s_messagedate_layer, GColorBlack);
+        
+        persist_write_int(COLOUR_INVERT, 4);
       }
       break;
     }
