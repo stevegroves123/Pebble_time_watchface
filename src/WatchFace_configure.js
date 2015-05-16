@@ -7,7 +7,7 @@ Pebble.addEventListener("ready",
 Pebble.addEventListener("showConfiguration",
   function(e) {
     //Load the remote config page
-    Pebble.openURL("https://dl.dropboxusercontent.com/u/53394138/Pebble%20Control%20Settings.html");
+    Pebble.openURL("https://db.tt/RUUb1Z1v");
   }
 );
 

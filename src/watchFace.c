@@ -9,8 +9,8 @@
 
   // Create a long-lived buffer
 static char buffer[] = "00:00";
-static char year[] = "0000";
-static char date[] = "00/00";
+static char year[] = "0000 ";
+static char date[] = " 00/00";
 
   // Create static text_layers
 static Window *s_main_window;
@@ -34,8 +34,8 @@ static void update_time() {
   }
 
   // Display the date in day/month format
-  strftime(date, sizeof(" 00/00"), "%d/%m", tick_time);
-  strftime(year, sizeof("0000 "), " %Y", tick_time);
+  strftime(date, sizeof(" 00/00"), " %d/%m", tick_time);
+  strftime(year, sizeof("0000 "), "%Y ", tick_time);
   
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, buffer);
@@ -61,12 +61,12 @@ static void main_window_load(Window *window)
     
   s_messagedate_layer = text_layer_create(GRect (0, 0, 144, 50));
   text_layer_set_font(s_messagedate_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
-  text_layer_set_text_color(s_messagedate_layer, GColorWhite);
+  text_layer_set_text_color(s_messagedate_layer, GColorBlack);
   text_layer_set_text_alignment(s_messagedate_layer, GTextAlignmentLeft);
   
   s_messageyear_layer = text_layer_create(GRect (0, 120, 144, 50)); 
   text_layer_set_font(s_messageyear_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
-  text_layer_set_text_color(s_messageyear_layer, GColorWhite);
+  text_layer_set_text_color(s_messageyear_layer, GColorBlack);
   text_layer_set_text_alignment(s_messageyear_layer, GTextAlignmentRight);  
   
   //Option-specific setup
