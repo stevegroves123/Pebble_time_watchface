@@ -92,13 +92,15 @@ static void main_window_load(Window *window)
     {
       s_messagedate_layer = text_layer_create(GRect (0, 0, 144, 50));
       text_layer_set_font(s_messagedate_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
-      text_layer_set_text_color(s_messagedate_layer, GColorBlack);
+      text_layer_set_text_color(s_messagedate_layer, GColorWhite);
+      text_layer_set_background_color(s_messagedate_layer, GColorBlack);
       text_layer_set_text(s_messagedate_layer, pebs);
       text_layer_set_text_alignment(s_messagedate_layer, GTextAlignmentLeft);
   
       s_messageyear_layer = text_layer_create(GRect (0, 120, 144, 50)); 
       text_layer_set_font(s_messageyear_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
-      text_layer_set_text_color(s_messageyear_layer, GColorBlack);
+      text_layer_set_text_color(s_messageyear_layer, GColorWhite);
+      text_layer_set_background_color(s_messageyear_layer, GColorBlack);
       text_layer_set_text(s_messageyear_layer, pebtime);
       text_layer_set_text_alignment(s_messageyear_layer, GTextAlignmentRight);
     
@@ -140,15 +142,6 @@ static void main_window_load(Window *window)
         text_layer_set_text_color(s_messagedate_layer, GColorBlack); 
         text_layer_set_background_color(s_messagedate_layer, GColorYellow);
         flag = false;
-  }
-  else if (inverted == 5)
-    {
-        //Set colout to black and no date/time
-        text_layer_set_text_color(s_messageyear_layer, GColorWhite);
-        text_layer_set_background_color(s_messageyear_layer, GColorBlack);
-        text_layer_set_text_color(s_messagedate_layer, GColorWhite); 
-        text_layer_set_background_color(s_messagedate_layer, GColorBlack);
-        flag = true;
   }
   
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_time_layer));
