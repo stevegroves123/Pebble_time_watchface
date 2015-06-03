@@ -9,10 +9,10 @@
 
   // Create a long-lived buffers
 static char time_buffer[] = "00:00";
-static char year[] = "0000 ";
-static char date[] = " 00/00";
-static char pebs[] = " Pebble";
-static char pebtime[] = "time ";
+static char year[] = "0000   ";
+static char date[] = "   00/00";
+static char pebs[] = "   Pebble";
+static char pebtime[] = "time   ";
 static bool flag = false;
 
   // Create static text_layers
@@ -38,8 +38,8 @@ static void update_time() {
   }
 
   // Display the date in day/month format
-  strftime(date, sizeof(" 00/00"), " %d/%m", tick_time);
-  strftime(year, sizeof("0000 "), "%Y ", tick_time);
+  strftime(date, sizeof("   00/00"), "   %d/%m", tick_time);
+  strftime(year, sizeof("0000   "), "%Y   ", tick_time);
   
   if(flag==true)
     {
@@ -237,7 +237,7 @@ static void init()
   // Make sure the time is displayed from the start
   update_time();
   
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);  
+  tick_timer_service_subscribe(SECOND_UNIT, tick_handler);  
   
   // do something with the feedback from the phone
   app_message_register_inbox_received((AppMessageInboxReceived) in_recv_handler);
